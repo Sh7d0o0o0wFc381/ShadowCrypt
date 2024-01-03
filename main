@@ -8,7 +8,7 @@ import (
 )
 
 func serveImage(w http.ResponseWriter, r *http.Request) {
-	// URL of the important picture
+	////////////////// URL of the IMPORTANT picture  ////////////////////////////////////
 	imageURL := "https://drive.google.com/file/d/14ELozitHnmmpLXVRAWGjcmGx3MD2k1GM/view?usp=drive_link"
 
 	// Fetch the image from the URL
