@@ -9,7 +9,7 @@ import (
 func handleConnection(conn net.Conn) {
 	defer conn.Close()
 
-	// Read data from client
+	// ////////Read data from client
 	buffer := make([]byte, 1024)
 	n, err := conn.Read(buffer)
 	if err != nil {
@@ -17,7 +17,7 @@ func handleConnection(conn net.Conn) {
 		return
 	}
 
-	// Print received message from client
+	// ////////Print received message from client
 	fmt.Printf("Received message from client: %s\n", string(buffer[:n]))
 
 	// Send response back to client
