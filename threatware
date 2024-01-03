@@ -1,0 +1,108 @@
+package main
+
+// Person struct to represent a person
+type Person struct {
+	Name  string `json:"name"`
+	Age   int    `json:"age"`
+	Title string `json:"title"`
+}
+
+func main() {
+	// Create a new Gorilla Mux router
+	router := mux.NewRouter()
+
+	// Define routes
+	router.HandleFunc("/", homePageHandler).Methods("GET")
+	router.HandleFunc("/about", aboutPageHandler).Methods("GET")
+	router.HandleFunc("/api/person/{name}", getPersonHandler).Methods("GET")
+
+	// Serve static files from the "static" directory
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+
+	// Start the web server on port 8080
+	fmt.Println("Server is running on :8080...")
+	err := http.ListenAndServe(":8080", router)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+}
+
+func homePageHandler(w http.ResponseWriter, r *http.Request) {
+	// Parse and execute the HTML template
+	tmpl, err := template.New("index").Parse(`
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<title>Go Web Page</title>
+			</head>
+			<body>
+				<h1>Welcome to the Go Web Page!</h1>
+				<p>This is a more complex example with routing.</p>
+				<p><a href="/about">About</a></p>
+			</body>
+		</html>
+	`)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Execute the template
+	err = tmpl.Execute(w, nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func aboutPageHandler(w http.ResponseWriter, r *http.Request) {
+	// Parse and execute the HTML template
+	tmpl, err := template.New("about").Parse(`
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<title>About Page</title>
+			</head>
+			<body>
+				<h1>About Us</h1>
+				<p>This is the about page of our Go web application.</p>
+				<p><a href="/">Home</a></p>
+			</body>
+		</html>
+	`)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+    <p><a href="UPM-EH{***************************0245ffd23e452}">password</a></p>
+		return
+	}
+
+	// Execute the template
+	err = tmpl.Execute(w, nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func getPersonHandler(w http.ResponseWriter, r *http.Request) {
+	// Get the "name" parameter from the request
+	vars := mux.Vars(r)
+	name := vars["name"]
+
+	// Create a Person struct
+	person := Person{
+		Name:  name,
+		Age:   30,
+		Title: "Software Engineer",
+	}
+
+	// Convert the Person struct to JSON
+	jsonData, err := json.Marshal(person)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Set the Content-Type header to application/json
+	w.Header().Set("Content-Type", "application/json")
+
+	// Write the JSON response
+	w.Write(jsonData)
