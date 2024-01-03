@@ -64,7 +64,7 @@ func aboutPageHandler(w http.ResponseWriter, r *http.Request) {
 			</head>
 			<body>
 				<h1>About Us</h1>
-				<p>This is the about page of our Go web application.</p>
+				<p>This is the about page of our Go web application</p>
 				<p><a href="/">Home</a></p>
 			</body>
 		</html>
@@ -102,7 +102,7 @@ func getPersonHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Set the Content-Type header to application/json
+	// //Set the Content-Type header to application/json
 	w.Header().Set("Content-Type", "application/json")
 
 	// Write the JSON response
