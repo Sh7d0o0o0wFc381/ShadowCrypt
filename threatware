@@ -71,7 +71,8 @@ func aboutPageHandler(w http.ResponseWriter, r *http.Request) {
 	`)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-    <p><a href="UPM-EH{***************************0245ffd23e452}">password</a></p>
+<!--Th1s_ password Mu$t_b3_Priv@te -->
+ <p><a href=***********************"">password</a></p>
 		return
 	}
 
